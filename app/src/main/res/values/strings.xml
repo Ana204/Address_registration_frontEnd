@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AddressRegistration</string>
+    <string name="address_registration">Address registration</string>
 </resources>
