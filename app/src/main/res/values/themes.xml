@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.AddressRegistration" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimary">@color/gray_700</item>
         <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:background">@color/gray</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/gray</item>
         <item name="colorSecondaryVariant">@color/orange</item>
