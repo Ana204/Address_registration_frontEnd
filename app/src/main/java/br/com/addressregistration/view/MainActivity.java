@@ -1,8 +1,10 @@
-package br.com.addressregistration;
+package br.com.addressregistration.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import br.com.addressregistration.R;
 
 public class MainActivity extends AppCompatActivity {
 
