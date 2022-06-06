@@ -15,54 +15,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.addressregistration.Utils.Utils;
-import br.com.addressregistration.model.Users_model;
 
-public class User {
+public class PostRequestUser {
 
     RequestQueue queue;
     Context context;
 
-    public User(Context context) {
+    public PostRequestUser(Context context) {
         this.context = context;
     }
 
-    public void GetUsers(){
-        queue = Volley.newRequestQueue(context);
-
-        JsonObjectRequest jsonRequestUsers = new JsonObjectRequest(Request.Method.GET, Utils.URL_USERS, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i("JSON", "onResponse: " + response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("JSON", "ERROR: " + error);
-            }
-        });
-
-
-        jsonRequestUsers.setRetryPolicy(new DefaultRetryPolicy(
-                6000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS
-        ));
-
-        queue.add(jsonRequestUsers);
-    }
-
-
-    public void PostUsers(Users_model usersModel) {
+    public void RequestUsers() {
         queue = Volley.newRequestQueue(context);
 
         JSONObject object = new JSONObject();
 
         try {
-            //object.put("Id", usersModel.getId());
-            object.put("Id", "1");
-            object.put("Nome" , usersModel.getNome());
-            object.put("Email", usersModel.getEmail());
+            object.put("Id", "2");
+            object.put("Nome" , "Ana Lucia");
+            object.put("Email", "Anagomes@hotmail.com");
             object.put("Telefone", "11967659766");
             object.put("Cep", "07865030");
 
@@ -72,11 +43,11 @@ public class User {
 
         JsonObjectRequest postRequestUsers = new JsonObjectRequest(Request.Method.POST, Utils.URL_POST, object,
                 new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i("POST", "JsonObject: " + response);
-                    }
-                }, new Response.ErrorListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("POST", "JsonObject: " + response);
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("POST", "onErrorResponse: " + error);
