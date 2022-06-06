@@ -1,22 +1,13 @@
 package br.com.addressregistration.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.PrimitiveIterator;
-
 import br.com.addressregistration.R;
-import br.com.addressregistration.model.FormUsers_model;
-import br.com.addressregistration.dominio.api.GetRequestUser;
 import br.com.addressregistration.viewModel.Users;
-import br.com.addressregistration.viewModel.UsersPost;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private Button button_enviar;
 
     private Users viewModelUsers;
-    private UsersPost viewModelPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         //get request
         viewModelUsers = new Users(this);
-        viewModelUsers.ApiRest();
+        viewModelUsers.GetRest();
 
-        viewModelPost = new UsersPost(this);
     }
 
     public void StartComponents(){
@@ -59,17 +48,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //post request
-                viewModelPost.PostUsers();
+                completedForm();
+
                 Log.i("POST", "Button clicado: ");
             }
         });
     }
 
-/*    private void setComponents( ){
-        textInputEditTextName.setText();
-        textInputEditTextEmail.setText();
-        textInputEditTextTelephone.setText();
-        textInputEditTextCep.setText();
-    }*/
+
+    public void completedForm(){
+       String nameUser = textInputEditTextName.getText().toString();
+       String emailUser = textInputEditTextEmail.getText().toString();
+
+        //post request
+        viewModelUsers = new Users(getApplicationContext());
+        viewModelUsers.PostRest(nameUser, emailUser);
+
+        Log.i("DATA_USER", "completedForm: " + nameUser);
+        Log.i("DATA_USER", "completedForm: " + emailUser);
+    }
 }

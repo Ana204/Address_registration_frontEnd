@@ -1,6 +1,6 @@
 package br.com.addressregistration.model;
 
-public class FormUsers_model {
+public class Users_model {
 
     private Integer Id;
     private String Nome;
@@ -8,11 +8,11 @@ public class FormUsers_model {
     private Integer Telefone;
     private Integer Cep;
 
-    public FormUsers_model(String name, String email, Integer celular, Integer cep) {
+    public Users_model(String name, String email) {
         this.Nome = name;
         this.Email = email;
-        this.Telefone = celular;
-        Cep = cep;
+//        this.Telefone = celular;
+//        Cep = cep;
     }
 
     public String getNome() {
