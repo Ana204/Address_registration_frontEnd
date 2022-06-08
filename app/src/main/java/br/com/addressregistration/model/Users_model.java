@@ -1,14 +1,14 @@
 package br.com.addressregistration.model;
 
-public class FormUsers_model {
+public class Users_model {
 
     private Integer Id;
     private String Nome;
     private String Email;
-    private Integer Telefone;
-    private Integer Cep;
+    private String Telefone;
+    private String Cep;
 
-    public FormUsers_model(String name, String email, Integer celular, Integer cep) {
+    public Users_model(String name, String email, String celular, String cep) {
         this.Nome = name;
         this.Email = email;
         this.Telefone = celular;
@@ -31,27 +31,27 @@ public class FormUsers_model {
         this.Email = email;
     }
 
-    public Integer getTelefone() {
-        return Telefone;
-    }
-
-    public void setTelefone(Integer telefone) {
-        this.Telefone = telefone;
-    }
-
-    public Integer getCep() {
-        return Cep;
-    }
-
-    public void setCep(Integer cep) {
-        Cep = cep;
-    }
-
     public Integer getId() {
         return Id;
     }
 
     public void setId(Integer id) {
         this.Id = id;
+    }
+
+    public String getTelefone() {
+        return Telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        Telefone = telefone;
+    }
+
+    public String getCep() {
+        return Cep;
+    }
+
+    public void setCep(String cep) {
+        Cep = cep;
     }
 }
