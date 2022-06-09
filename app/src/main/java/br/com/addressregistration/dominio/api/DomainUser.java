@@ -72,7 +72,8 @@ public class DomainUser {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("POST", "JsonObject: " + response);
+                        
+                        Log.i("POST", "onResponse: " + response);
                     }
                 }, new Response.ErrorListener() {
             @Override

@@ -1,5 +1,6 @@
 package br.com.addressregistration.model;
 
+
 public class Users_model {
 
     private Integer Id;
@@ -9,6 +10,9 @@ public class Users_model {
     private String Cep;
 
     public Users_model(String name, String email, String celular, String cep) {
+
+        validateData(name, email, celular, cep);
+
         this.Nome = name;
         this.Email = email;
         this.Telefone = celular;
@@ -53,5 +57,26 @@ public class Users_model {
 
     public void setCep(String cep) {
         Cep = cep;
+    }
+
+    public void validateData(String name, String email, String celular, String cep){
+
+            if (name.isEmpty()){
+                throw new IllegalArgumentException("Preencha o campo nome");
+            }
+            else if(email.isEmpty()){
+                throw new IllegalArgumentException("Preencha o campo email");
+            }
+            else if (celular.isEmpty()){
+                throw new IllegalArgumentException("Preencha o campo celular");
+            }
+            else if (cep.isEmpty()){
+                throw new IllegalArgumentException("Preencha o campo cep");
+            }else {
+                throw new IllegalArgumentException("Usuario cadastrado com sucesso !");
+            }
+
+
+
     }
 }

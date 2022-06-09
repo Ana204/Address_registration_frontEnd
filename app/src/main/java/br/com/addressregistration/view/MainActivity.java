@@ -2,11 +2,14 @@ package br.com.addressregistration.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import br.com.addressregistration.R;
@@ -51,19 +54,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                UsersData();
+                UsersData(view);
                 Log.i("POST", "Button clicado: ");
             }
         });
     }
 
 
-    public void UsersData(){
+    public void UsersData(View view){
         String name = textInputEditTextName.getText().toString();
         String email = textInputEditTextEmail.getText().toString();
         String telephone = textInputEditTextTelephone.getText().toString();
         String cep = textInputEditTextCep.getText().toString();
 
-        viewModelUsers.PostUsers(name, email, telephone, cep);
+        try {
+            viewModelUsers.PostUsers(name, email, telephone, cep);
+
+        }catch (IllegalArgumentException e){
+
+            Snackbar snackbar = Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG);
+            snackbar.setBackgroundTint(Color.WHITE);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
+        }
+
     }
 }
