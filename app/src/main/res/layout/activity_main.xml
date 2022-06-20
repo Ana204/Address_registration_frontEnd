@@ -55,6 +55,7 @@
                 android:id="@+id/textInputEditTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPersonName"
                 android:textColor="@color/white"
                 />
 
@@ -76,6 +77,7 @@
                 android:id="@+id/textInputEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 />
 
@@ -97,6 +99,7 @@
                 android:id="@+id/textInputEditTextTelephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:textColor="@color/white"
                 />
 
@@ -150,6 +153,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEditTextRua"
                 android:layout_width="match_parent"
+                android:inputType="text"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 />
@@ -171,6 +175,7 @@
                 android:id="@+id/textInputEditTextHouseNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:textColor="@color/white"
                 />
 
