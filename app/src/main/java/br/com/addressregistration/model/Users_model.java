@@ -1,10 +1,8 @@
 package br.com.addressregistration.model;
 
-
-import android.util.Log;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class Users_model {
 
@@ -40,20 +38,20 @@ public class Users_model {
         this.Email = email;
     }
 
-    public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        this.Id = id;
-    }
-
     public String getTelefone() {
         return Telefone;
     }
 
     public void setTelefone(String telefone) {
         Telefone = telefone;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public String getCep() {
@@ -66,8 +64,6 @@ public class Users_model {
 
     public void validateData(String name, String email, String celular, String cep){
 
-        // TODO: 10/06/2022 Testar essa nova validação
-
             if ((name.trim()).length() < 10)
                 throw new IllegalArgumentException("O campo nome deve conter no mínimo 10 caracteres");
 
@@ -76,10 +72,12 @@ public class Users_model {
             else
                 throw new IllegalArgumentException("Preencha o campo email");
 
-            if (celular.isEmpty()){
+            if (!celular.isEmpty())
+                isValidadeTelefone(celular);
+            else
                 throw new IllegalArgumentException("Preencha o campo celular");
-            }
-            else if (cep.isEmpty()){
+
+            if (cep.isEmpty()){
                 throw new IllegalArgumentException("Preencha o campo cep");
             }else {
                 throw new IllegalArgumentException("Usuario cadastrado com sucesso !");
@@ -99,8 +97,21 @@ public class Users_model {
             else
                 throw new IllegalArgumentException("Email invalido");
         }
-        Log.d("ISVALIDADE", "isValidadeEmailAddress: " + isEmailValid);
-
-
     }
+
+    public void isValidadeTelefone(String telefone){
+
+        boolean isValidadeTelefone = false;
+
+        if (telefone.length() > 0){
+            String expression = "^\\([1-9]{2}\\)9[1-9]{4}\\-[0-9]{4}$";
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(telefone);
+            if (matcher.matches())
+                isValidadeTelefone = true;
+            else
+                throw new IllegalArgumentException("Telefone invalido");
+        }
+    }
+
 }

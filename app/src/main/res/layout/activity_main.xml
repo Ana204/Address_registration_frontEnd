@@ -95,15 +95,18 @@
             app:boxStrokeErrorColor="@color/red"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
+
+            <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/textInputEditTextTelephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:textColor="@color/white"
+                android:inputType="number"
+                app:mask="(##)#####-####"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutCep"
