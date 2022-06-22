@@ -64,7 +64,8 @@ public class Users_model {
 
     public void validateData(String name, String email, String celular, String cep){
 
-            if ((name.trim()).length() < 10)
+
+            if (name.length() < 10)
                 throw new IllegalArgumentException("O campo nome deve conter no mínimo 10 caracteres");
 
             if(!email.isEmpty())
@@ -77,11 +78,12 @@ public class Users_model {
             else
                 throw new IllegalArgumentException("Preencha o campo celular");
 
-            if (cep.isEmpty()){
-                throw new IllegalArgumentException("Preencha o campo cep");
-            }else {
-                throw new IllegalArgumentException("Usuario cadastrado com sucesso !");
-            }
+            if (!cep.isEmpty())
+                isValidadeCep(cep);
+            else
+             throw new IllegalArgumentException("Preencha o campo cep");
+
+        throw new IllegalArgumentException("Usuario cadastrado com sucesso !!");
     }
 
     public void  isValidadeEmailAddress(String email){
@@ -111,6 +113,22 @@ public class Users_model {
                 isValidadeTelefone = true;
             else
                 throw new IllegalArgumentException("Telefone invalido");
+        }
+    }
+
+    public void isValidadeCep(String cep){
+
+        boolean isValidadeCep = false;
+
+        if (cep.length() < 7){
+            String expression = "^[0-9]{5}\\-[0-9]{3}$";
+            Pattern pattern = Pattern.compile(expression,Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(cep);
+
+            if (matcher.matches())
+                isValidadeCep = true;
+            else
+                throw new IllegalArgumentException("Cep invalido");
         }
     }
 
