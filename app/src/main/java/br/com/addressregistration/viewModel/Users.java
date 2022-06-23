@@ -22,16 +22,19 @@ public class Users {
     public void RequestUsers(){
         user = new DomainUser(this.context);
         user.GetUsers();
-        Log.i("JSON", "A ViewModel conseguiu chamar o metodo RequestUsers: ");
+        //Log.i("JSON", "A ViewModel conseguiu chamar o metodo RequestUsers: ");
     }
 
     //chama endPoint post
-    public void PostUsers(String name, String email, String telephone, String cep){
+    public void viewModel_users(String name, String email, String telephone, String cep,
+                                String logradouro, String numeroCasa, String complemento, String bairro, String cidade, String uf){
         user = new DomainUser(this.context);
 
         try {
-            usersModel = new Users_model(name, email, telephone, cep);
+            usersModel = new Users_model(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, cidade, uf);
             user.PostUsers(usersModel);
+
+            Log.i("POST", "View conseguiu chamar o metodo PostUsers: ");
 
         }catch (IllegalArgumentException e){
 
@@ -39,6 +42,18 @@ public class Users {
 
         }
 
-        Log.i("POST", "View conseguiu chamar o metodo PostUsers: ");
+
+    }
+
+    public void GetViaCep(){
+        user = new DomainUser(this.context);
+
+        try {
+            //usersModel = new Users_model();
+            user.getViaCep();
+        }catch (IllegalArgumentException e){
+
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 }

@@ -210,7 +210,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayoutBairro"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -219,7 +219,30 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutBairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/bairro"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/orange"
+            app:boxStrokeErrorColor="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutComplement"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextBairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -235,10 +258,10 @@
         >
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutRegion"
+            android:id="@+id/textInputLayoutCity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/localidade"
+            android:hint="@string/City"
             android:layout_weight="2"
             android:layout_marginStart="16dp"
             android:textColorHint="@color/white"
@@ -247,7 +270,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextRegion"
+                android:id="@+id/textInputEditTextCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -255,24 +278,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutState"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/estado"
-            android:layout_weight="1"
-            android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/orange"
-            app:boxStrokeErrorColor="@color/red"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUf"

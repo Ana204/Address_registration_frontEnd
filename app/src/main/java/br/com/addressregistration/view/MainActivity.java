@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText textInputEditTextName, textInputEditTextEmail,
             textInputEditTextTelephone,textInputEditTextCep;
+    private TextInputEditText textInputEditTextRua, textInputEditTextHouseNumber, textInputEditTextComplement,
+            textInputEditTextCity,textInputEditTextBairro, textInputEditTextUf;
 
     private Button button_enviar;
 
@@ -45,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextTelephone = findViewById(R.id.textInputEditTextTelephone);
         textInputEditTextCep = findViewById(R.id.textInputEditTextCep);
+        textInputEditTextRua = findViewById(R.id.textInputEditTextRua);
+        textInputEditTextHouseNumber = findViewById(R.id.textInputEditTextHouseNumber);
+        textInputEditTextComplement = findViewById(R.id.textInputEditTextComplement);
+        textInputEditTextCity = findViewById(R.id.textInputEditTextCity);
+        textInputEditTextBairro = findViewById(R.id.textInputEditTextBairro);
+        textInputEditTextUf = findViewById(R.id.textInputEditTextUf);
+
+
         button_enviar = findViewById(R.id.button_enviar);
 
     }
@@ -67,8 +76,15 @@ public class MainActivity extends AppCompatActivity {
         String telephone = textInputEditTextTelephone.getText().toString();
         String cep = textInputEditTextCep.getText().toString();
 
+        String logradouro = textInputEditTextRua.getText().toString();
+        String numeroCasa = textInputEditTextHouseNumber.getText().toString();
+        String complemento = textInputEditTextComplement.getText().toString();
+        String bairro = textInputEditTextBairro.getText().toString();
+        String cidade = textInputEditTextCity.getText().toString();
+        String uf = textInputEditTextUf.getText().toString();
+
         try {
-            viewModelUsers.PostUsers(name, email, telephone, cep);
+            viewModelUsers.viewModel_users(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, cidade, uf);
 
         }catch (IllegalArgumentException e){
 

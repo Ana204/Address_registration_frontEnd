@@ -11,15 +11,29 @@ public class Users_model {
     private String Email;
     private String Telefone;
     private String Cep;
+    private String Logradouro;
+    private String Complemento;
+    private String Bairro;
+    private String Cidade;
+    private String Uf;
+    private String CasaNumero;
 
-    public Users_model(String name, String email, String celular, String cep) {
+
+    public Users_model(String name, String email, String celular, String cep, String logradouro,
+                       String numeroCasa, String complemento, String bairro, String cidade, String uf) {
 
         validateData(name, email, celular, cep);
 
         this.Nome = name;
         this.Email = email;
         this.Telefone = celular;
-        Cep = cep;
+        this.Cep = cep;
+        this.Logradouro = logradouro;
+        this.CasaNumero = numeroCasa;
+        this.Complemento = complemento;
+        this.Bairro = bairro;
+        this.Cidade = cidade;
+        this.Uf = uf;
     }
 
     public String getNome() {
@@ -62,6 +76,56 @@ public class Users_model {
         Cep = cep;
     }
 
+    public String getLogradouro() {
+        return Logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        Logradouro = logradouro;
+    }
+
+    public String getCasaNumero() {
+        return CasaNumero;
+    }
+
+    public void setCasaNumero(String casaNumero) {
+        CasaNumero = casaNumero;
+    }
+
+
+    public String getComplemento() {
+        return Complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        Complemento = complemento;
+    }
+
+    public String getBairro() {
+        return Bairro;
+    }
+
+    public void setBairro(String bairro) {
+        Bairro = bairro;
+    }
+
+    public String getCidade() {
+        return Cidade;
+    }
+
+    public void setCidade(String cidade) {
+        Cidade = cidade;
+    }
+
+    public String getUf() {
+        return Uf;
+    }
+
+    public void setUf(String uf) {
+        Uf = uf;
+    }
+
+    //validação
     public void validateData(String name, String email, String celular, String cep){
 
 
@@ -83,7 +147,7 @@ public class Users_model {
             else
              throw new IllegalArgumentException("Preencha o campo cep");
 
-        throw new IllegalArgumentException("Usuario cadastrado com sucesso !!");
+
     }
 
     public void  isValidadeEmailAddress(String email){

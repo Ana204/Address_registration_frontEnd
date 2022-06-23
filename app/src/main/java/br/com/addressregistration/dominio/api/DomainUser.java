@@ -57,12 +57,22 @@ public class DomainUser {
 
         JSONObject object = new JSONObject();
 
+        //TODO: colocar novos dados no obj abaixo
+
         try {
             object.put("Id", "2");
             object.put("Nome" , usersModel.getNome());
             object.put("Email", usersModel.getEmail());
             object.put("Telefone", usersModel.getTelefone());
             object.put("Cep", usersModel.getCep());
+            object.put("Logradouro", usersModel.getLogradouro());
+            object.put("CasaNumero", usersModel.getCasaNumero());
+            object.put("Complemento", usersModel.getComplemento());
+            object.put("Bairro", usersModel.getBairro());
+            object.put("Cidade", usersModel.getCidade());
+            object.put("Uf", usersModel.getUf());
+
+            Log.i("POST", "PostUsers: " + object);
 
         }catch (JSONException e){
             Log.i("POST", "postData: " + e.getMessage());
@@ -89,5 +99,31 @@ public class DomainUser {
         ));
 
         queue.add(postRequestUsers);
+    }
+
+    public void getViaCep(){
+        queue = Volley.newRequestQueue(context);
+
+
+        JsonObjectRequest getRequestCep = new JsonObjectRequest(Request.Method.GET, Utils.BASE_URL_VIA_CEP, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("POST", "onResponse: " + response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("POST", "onErrorResponse: " + error);
+            }
+        });
+
+        getRequestCep.setRetryPolicy(new DefaultRetryPolicy(
+                6000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS
+        ));
+
+        queue.add(getRequestCep);
     }
 }

@@ -8,8 +8,9 @@
     <string name="nome_da_rua">Nome da rua</string>
     <string name="n">Nº</string>
     <string name="complemento">Complemento</string>
-    <string name="localidade">Localidade</string>
+    <string name="City">Cidade</string>
     <string name="estado">Estado</string>
-    <string name="uf">Uf</string>
+    <string name="bairro">Bairro</string>
+    <string name="uf">Estado</string>
     <string name="enviar">Enviar</string>
 </resources>
