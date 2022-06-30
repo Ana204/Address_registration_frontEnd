@@ -15,12 +15,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.addressregistration.Utils.Utils;
+import br.com.addressregistration.model.APICallback;
+import br.com.addressregistration.model.Endereco_model;
 import br.com.addressregistration.model.Users_model;
 
 public class DomainUser {
 
     RequestQueue queue;
     Context context;
+    APICallback callback;
 
     public DomainUser(Context context) {
         this.context = context;
@@ -57,20 +60,11 @@ public class DomainUser {
 
         JSONObject object = new JSONObject();
 
-        //TODO: colocar novos dados no obj abaixo
-
         try {
             object.put("Id", "2");
             object.put("Nome" , usersModel.getNome());
             object.put("Email", usersModel.getEmail());
             object.put("Telefone", usersModel.getTelefone());
-            object.put("Cep", usersModel.getCep());
-            object.put("Logradouro", usersModel.getLogradouro());
-            object.put("CasaNumero", usersModel.getCasaNumero());
-            object.put("Complemento", usersModel.getComplemento());
-            object.put("Bairro", usersModel.getBairro());
-            object.put("Cidade", usersModel.getCidade());
-            object.put("Uf", usersModel.getUf());
 
             Log.i("POST", "PostUsers: " + object);
 
@@ -101,15 +95,33 @@ public class DomainUser {
         queue.add(postRequestUsers);
     }
 
-    public void getViaCep(){
+    public void getViaCep(String cep){
+
         queue = Volley.newRequestQueue(context);
 
-
-        JsonObjectRequest getRequestCep = new JsonObjectRequest(Request.Method.GET, Utils.BASE_URL_VIA_CEP, null,
+        JsonObjectRequest getRequestCep = new JsonObjectRequest(Request.Method.GET, Utils.BASE_URL_VIA_CEP+cep+"/json", null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("POST", "onResponse: " + response);
+
+                        try {
+                            Endereco_model enderecoModel = new Endereco_model(
+                                    response.getString("logradouro"),
+                                    response.getString("complemento"),
+                                    response.getString("bairro"),
+                                    response.getString("localidade"),
+                                    response.getString("uf")
+
+                            );
+
+                            callback.onSuccess(enderecoModel);
+                            Log.i("GET", "onResponse: " + enderecoModel.getLogradouro());
+
+                        } catch (JSONException e) {
+                            Log.i("GET", "ERROR: " + e);
+                            callback.onError(e.toString());
+                        }
+
                     }
                 }, new Response.ErrorListener() {
             @Override

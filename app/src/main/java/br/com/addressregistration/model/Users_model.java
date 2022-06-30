@@ -10,31 +10,30 @@ public class Users_model {
     private String Nome;
     private String Email;
     private String Telefone;
-    private String Cep;
-    private String Logradouro;
-    private String Complemento;
-    private String Bairro;
-    private String Cidade;
-    private String Uf;
     private String CasaNumero;
 
+    private Endereco_model Endereco;
 
     public Users_model(String name, String email, String celular, String cep, String logradouro,
-                       String numeroCasa, String complemento, String bairro, String cidade, String uf) {
+                       String numeroCasa, String complemento, String bairro, String localidade, String uf) {
 
         validateData(name, email, celular, cep);
 
         this.Nome = name;
         this.Email = email;
         this.Telefone = celular;
-        this.Cep = cep;
-        this.Logradouro = logradouro;
         this.CasaNumero = numeroCasa;
+        //this.Endereco = new Endereco_model();
+        /*this.Cep = cep;
+        this.Logradouro = logradouro;
+
         this.Complemento = complemento;
         this.Bairro = bairro;
-        this.Cidade = cidade;
-        this.Uf = uf;
+        this.Localidade = localidade;
+        this.Uf = uf;*/
     }
+
+
 
     public String getNome() {
         return Nome;
@@ -66,63 +65,6 @@ public class Users_model {
 
     public void setId(Integer id) {
         this.Id = id;
-    }
-
-    public String getCep() {
-        return Cep;
-    }
-
-    public void setCep(String cep) {
-        Cep = cep;
-    }
-
-    public String getLogradouro() {
-        return Logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        Logradouro = logradouro;
-    }
-
-    public String getCasaNumero() {
-        return CasaNumero;
-    }
-
-    public void setCasaNumero(String casaNumero) {
-        CasaNumero = casaNumero;
-    }
-
-
-    public String getComplemento() {
-        return Complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        Complemento = complemento;
-    }
-
-    public String getBairro() {
-        return Bairro;
-    }
-
-    public void setBairro(String bairro) {
-        Bairro = bairro;
-    }
-
-    public String getCidade() {
-        return Cidade;
-    }
-
-    public void setCidade(String cidade) {
-        Cidade = cidade;
-    }
-
-    public String getUf() {
-        return Uf;
-    }
-
-    public void setUf(String uf) {
-        Uf = uf;
     }
 
     //validação

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +14,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import br.com.addressregistration.R;
+import br.com.addressregistration.dominio.api.DomainUser;
+import br.com.addressregistration.model.APICallback;
+import br.com.addressregistration.model.Endereco_model;
+import br.com.addressregistration.model.Users_model;
 import br.com.addressregistration.viewModel.Users;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private TextInputEditText textInputEditTextName, textInputEditTextEmail,
             textInputEditTextTelephone,textInputEditTextCep;
@@ -24,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private Button button_enviar;
 
     private Users viewModelUsers;
+    private DomainUser domainUser;
+    private Users_model usersModel;
+
+    Endereco_model enderecoModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +44,70 @@ public class MainActivity extends AppCompatActivity {
 
         StartComponents();
         buttonRegister();
+        textListenerCep();
 
         //get request
         viewModelUsers = new Users(this);
-        viewModelUsers.RequestUsers();
+       // viewModelUsers.RequestUsers();
 
+        domainUser = new DomainUser(this);
     }
+
+    public void textListenerCep(){
+        textInputEditTextCep.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (charSequence.length() == 9){
+                    String cep = textInputEditTextCep.getText().toString();
+                    domainUser.getViaCep(cep);
+
+                    APICallback callback = new APICallback() {
+                        @Override
+                        public void onSuccess(Endereco_model enderecoModel) {
+                            textInputEditTextRua.setText(enderecoModel.getLogradouro());
+                            textInputEditTextComplement.setText(enderecoModel.getComplemento());
+                            textInputEditTextCity.setText(enderecoModel.getLocalidade());
+                            textInputEditTextBairro.setText(enderecoModel.getBairro());
+                            textInputEditTextUf.setText(enderecoModel.getUf());
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            Log.i("GET", "onError: " + error);
+                        }
+                    };
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+/*    public void setComponentes(){
+
+        APICallback callback = new APICallback() {
+            @Override
+            public void onSuccess(Endereco_model enderecoModel) {
+
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.i("GET", "onError: " + error);
+            }
+        };
+
+    }*/
 
     public void StartComponents(){
         textInputEditTextName = findViewById(R.id.textInputEditTextName);
@@ -80,11 +148,11 @@ public class MainActivity extends AppCompatActivity {
         String numeroCasa = textInputEditTextHouseNumber.getText().toString();
         String complemento = textInputEditTextComplement.getText().toString();
         String bairro = textInputEditTextBairro.getText().toString();
-        String cidade = textInputEditTextCity.getText().toString();
+        String localidade = textInputEditTextCity.getText().toString();
         String uf = textInputEditTextUf.getText().toString();
 
         try {
-            viewModelUsers.viewModel_users(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, cidade, uf);
+            viewModelUsers.viewModel_users(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, localidade, uf);
 
         }catch (IllegalArgumentException e){
 
