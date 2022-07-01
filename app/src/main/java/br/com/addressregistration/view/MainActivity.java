@@ -10,10 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.addressregistration.R;
+import br.com.addressregistration.Utils.Utils;
 import br.com.addressregistration.dominio.api.DomainUser;
 import br.com.addressregistration.model.APICallback;
 import br.com.addressregistration.model.Endereco_model;
@@ -33,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
     private DomainUser domainUser;
     private Users_model usersModel;
 
-    Endereco_model enderecoModel;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +55,13 @@ public class MainActivity extends AppCompatActivity{
 
         StartComponents();
         buttonRegister();
-        textListenerCep();
 
         //get request
         viewModelUsers = new Users(this);
        // viewModelUsers.RequestUsers();
 
         domainUser = new DomainUser(this);
-    }
 
-    public void textListenerCep(){
         textInputEditTextCep.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -65,9 +73,8 @@ public class MainActivity extends AppCompatActivity{
 
                 if (charSequence.length() == 9){
                     String cep = textInputEditTextCep.getText().toString();
-                    domainUser.getViaCep(cep);
-
-                    APICallback callback = new APICallback() {
+                    DomainUser usersDomain = new DomainUser(getApplicationContext());
+                    usersDomain.getViaCep(cep, new APICallback() {
                         @Override
                         public void onSuccess(Endereco_model enderecoModel) {
                             textInputEditTextRua.setText(enderecoModel.getLogradouro());
@@ -79,11 +86,10 @@ public class MainActivity extends AppCompatActivity{
 
                         @Override
                         public void onError(String error) {
-                            Log.i("GET", "onError: " + error);
+                            Log.i("GET", "API_CALBACK_ERROR: " + error);
                         }
-                    };
+                    });
                 }
-
             }
 
             @Override
@@ -93,21 +99,6 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-/*    public void setComponentes(){
-
-        APICallback callback = new APICallback() {
-            @Override
-            public void onSuccess(Endereco_model enderecoModel) {
-
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.i("GET", "onError: " + error);
-            }
-        };
-
-    }*/
 
     public void StartComponents(){
         textInputEditTextName = findViewById(R.id.textInputEditTextName);

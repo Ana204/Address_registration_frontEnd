@@ -23,7 +23,6 @@ public class DomainUser {
 
     RequestQueue queue;
     Context context;
-    APICallback callback;
 
     public DomainUser(Context context) {
         this.context = context;
@@ -95,7 +94,7 @@ public class DomainUser {
         queue.add(postRequestUsers);
     }
 
-    public void getViaCep(String cep){
+    public void getViaCep(String cep, APICallback apiCallback){
 
         queue = Volley.newRequestQueue(context);
 
@@ -111,15 +110,14 @@ public class DomainUser {
                                     response.getString("bairro"),
                                     response.getString("localidade"),
                                     response.getString("uf")
-
                             );
 
-                            callback.onSuccess(enderecoModel);
+                            apiCallback.onSuccess(enderecoModel);
                             Log.i("GET", "onResponse: " + enderecoModel.getLogradouro());
 
                         } catch (JSONException e) {
+                            apiCallback.onError("ERROR" + e);
                             Log.i("GET", "ERROR: " + e);
-                            callback.onError(e.toString());
                         }
 
                     }
@@ -138,4 +136,5 @@ public class DomainUser {
 
         queue.add(getRequestCep);
     }
+
 }
