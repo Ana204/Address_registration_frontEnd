@@ -16,7 +16,7 @@ public class Users_model {
 
     public Users_model(String name, String email, String celular, String numeroCasa, String cep) {
 
-        validateData(name, email, celular, cep);
+        validateData(name, email, celular, numeroCasa, cep);
 
         this.Nome = name;
         this.Email = email;
@@ -76,8 +76,7 @@ public class Users_model {
     }
 
     //validação
-    public void validateData(String name, String email, String celular, String cep){
-
+    public void validateData(String name, String email, String celular, String numeroCasa, String cep){
 
             if (name.length() < 10)
                 throw new IllegalArgumentException("O campo nome deve conter no mínimo 10 caracteres");
@@ -92,12 +91,16 @@ public class Users_model {
             else
                 throw new IllegalArgumentException("Preencha o campo celular");
 
+            if (numeroCasa.isEmpty())
+                throw new IllegalArgumentException("Preencha o campo com numero da casa");
+
             if (!cep.isEmpty())
                 isValidadeCep(cep);
             else
              throw new IllegalArgumentException("Preencha o campo cep");
 
 
+            throw new IllegalArgumentException("Usuario cadastrado com sucesso");
     }
 
     public void  isValidadeEmailAddress(String email){

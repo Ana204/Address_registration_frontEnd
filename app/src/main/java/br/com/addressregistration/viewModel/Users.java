@@ -24,7 +24,6 @@ public class Users {
     public void RequestUsers(){
         user = new DomainUser(this.context);
         user.GetUsers();
-        //Log.i("JSON", "A ViewModel conseguiu chamar o metodo RequestUsers: ");
     }
 
     //chama endPoint post
