@@ -54,7 +54,7 @@ public class DomainUser {
         queue.add(jsonRequestUsers);
     }
 
-    public void PostUsers(Users_model usersModel) {
+    public void PostUsers(Users_model usersModel, Endereco_model enderecoModel) {
         queue = Volley.newRequestQueue(context);
 
         JSONObject object = new JSONObject();
@@ -64,8 +64,14 @@ public class DomainUser {
             object.put("Nome" , usersModel.getNome());
             object.put("Email", usersModel.getEmail());
             object.put("Telefone", usersModel.getTelefone());
+            object.put("CasaNumero", usersModel.getNumeroCasa());
+            object.put("Cep", usersModel.getCep());
+            object.put("Logradouro", enderecoModel.getLogradouro());
+            object.put("Complemento", enderecoModel.getComplemento());
+            object.put("Bairro", enderecoModel.getBairro());
+            object.put("Cidade", enderecoModel.getLocalidade());
+            object.put("Uf", enderecoModel.getUf());
 
-            Log.i("POST", "PostUsers: " + object);
 
         }catch (JSONException e){
             Log.i("POST", "postData: " + e.getMessage());
@@ -81,7 +87,7 @@ public class DomainUser {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("POST", "onErrorResponse: " + error);
+                Log.i("POST", "ERROR NO POST: " + error);
             }
         });
 
@@ -113,7 +119,7 @@ public class DomainUser {
                             );
 
                             apiCallback.onSuccess(enderecoModel);
-                            Log.i("GET", "onResponse: " + enderecoModel.getLogradouro());
+                            Log.i("RESPONSE", "onResponse: " + response);
 
                         } catch (JSONException e) {
                             apiCallback.onError("ERROR" + e);

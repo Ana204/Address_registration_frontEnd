@@ -9,6 +9,7 @@ public class Endereco_model {
     private String Uf;
 
 
+
     public Endereco_model(String logradouro, String complemento, String bairro, String localidade, String uf) {
         Logradouro = logradouro;
         Complemento = complemento;

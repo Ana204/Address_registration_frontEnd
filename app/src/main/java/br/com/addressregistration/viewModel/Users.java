@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import br.com.addressregistration.dominio.api.DomainUser;
+import br.com.addressregistration.model.Endereco_model;
 import br.com.addressregistration.model.Users_model;
 
 public class Users {
@@ -13,6 +14,7 @@ public class Users {
     private Context context;
     private DomainUser user;
     Users_model usersModel;
+    Endereco_model enderecoModel;
 
     public Users(Context context){
         this.context = context;
@@ -31,10 +33,10 @@ public class Users {
         user = new DomainUser(this.context);
 
         try {
-            usersModel = new Users_model(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, localidade, uf);
-            user.PostUsers(usersModel);
+            usersModel = new Users_model(name, email, telephone, numeroCasa, cep);
+            enderecoModel = new Endereco_model(logradouro, complemento, bairro, localidade, uf);
+            user.PostUsers(usersModel, enderecoModel);
 
-            Log.i("POST", "View conseguiu chamar o metodo PostUsers: ");
 
         }catch (IllegalArgumentException e){
 

@@ -10,27 +10,19 @@ public class Users_model {
     private String Nome;
     private String Email;
     private String Telefone;
-    private String CasaNumero;
+    private String NumeroCasa;
+    private String Cep;
 
-    private Endereco_model Endereco;
 
-    public Users_model(String name, String email, String celular, String cep, String logradouro,
-                       String numeroCasa, String complemento, String bairro, String localidade, String uf) {
+    public Users_model(String name, String email, String celular, String numeroCasa, String cep) {
 
         validateData(name, email, celular, cep);
 
         this.Nome = name;
         this.Email = email;
         this.Telefone = celular;
-        this.CasaNumero = numeroCasa;
-        //this.Endereco = new Endereco_model();
-        /*this.Cep = cep;
-        this.Logradouro = logradouro;
-
-        this.Complemento = complemento;
-        this.Bairro = bairro;
-        this.Localidade = localidade;
-        this.Uf = uf;*/
+        this.NumeroCasa = numeroCasa;
+        this.Cep = cep;
     }
 
 
@@ -57,6 +49,22 @@ public class Users_model {
 
     public void setTelefone(String telefone) {
         Telefone = telefone;
+    }
+
+    public String getNumeroCasa() {
+        return NumeroCasa;
+    }
+
+    public void setNumeroCasa(String numeroCasa) {
+        NumeroCasa = numeroCasa;
+    }
+
+    public String getCep() {
+        return Cep;
+    }
+
+    public void setCep(String cep) {
+        Cep = cep;
     }
 
     public Integer getId() {

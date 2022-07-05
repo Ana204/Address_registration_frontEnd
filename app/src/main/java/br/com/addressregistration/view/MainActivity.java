@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity{
 
     private Users viewModelUsers;
     private DomainUser domainUser;
-    private Users_model usersModel;
-
-    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +52,17 @@ public class MainActivity extends AppCompatActivity{
 
         StartComponents();
         buttonRegister();
+        textInputEndereco();
 
         //get request
         viewModelUsers = new Users(this);
        // viewModelUsers.RequestUsers();
 
         domainUser = new DomainUser(this);
+
+    }
+
+    public void textInputEndereco(){
 
         textInputEditTextCep.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,14 +93,13 @@ public class MainActivity extends AppCompatActivity{
                     });
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
         });
-    }
 
+    }
 
     public void StartComponents(){
         textInputEditTextName = findViewById(R.id.textInputEditTextName);
@@ -123,7 +124,6 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 UsersData(view);
-                Log.i("POST", "Button clicado: ");
             }
         });
     }
@@ -134,13 +134,13 @@ public class MainActivity extends AppCompatActivity{
         String email = textInputEditTextEmail.getText().toString();
         String telephone = textInputEditTextTelephone.getText().toString();
         String cep = textInputEditTextCep.getText().toString();
-
         String logradouro = textInputEditTextRua.getText().toString();
         String numeroCasa = textInputEditTextHouseNumber.getText().toString();
         String complemento = textInputEditTextComplement.getText().toString();
         String bairro = textInputEditTextBairro.getText().toString();
         String localidade = textInputEditTextCity.getText().toString();
         String uf = textInputEditTextUf.getText().toString();
+
 
         try {
             viewModelUsers.viewModel_users(name, email, telephone, cep, logradouro, numeroCasa, complemento, bairro, localidade, uf);
