@@ -1,14 +1,18 @@
 package br.com.addressregistration.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -17,11 +21,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import br.com.addressregistration.R;
 import br.com.addressregistration.Utils.Utils;
@@ -37,6 +45,8 @@ public class MainActivity extends AppCompatActivity{
             textInputEditTextTelephone,textInputEditTextCep;
     private TextInputEditText textInputEditTextRua, textInputEditTextHouseNumber, textInputEditTextComplement,
             textInputEditTextCity,textInputEditTextBairro, textInputEditTextUf;
+
+    private CircularProgressIndicator progress_circular;
 
     private Button button_enviar;
 
@@ -75,6 +85,17 @@ public class MainActivity extends AppCompatActivity{
 
                 if (charSequence.length() == 9){
                     String cep = textInputEditTextCep.getText().toString();
+
+                    progress_circular.setVisibility(View.VISIBLE);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress_circular.setVisibility(View.GONE);
+                        }
+                    }, 3000);
+
                     DomainUser usersDomain = new DomainUser(getApplicationContext());
                     usersDomain.getViaCep(cep, new APICallback() {
                         @Override
@@ -112,8 +133,7 @@ public class MainActivity extends AppCompatActivity{
         textInputEditTextCity = findViewById(R.id.textInputEditTextCity);
         textInputEditTextBairro = findViewById(R.id.textInputEditTextBairro);
         textInputEditTextUf = findViewById(R.id.textInputEditTextUf);
-
-
+        progress_circular = findViewById(R.id.progress_circular);
         button_enviar = findViewById(R.id.button_enviar);
 
     }
@@ -127,7 +147,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
 
     public void UsersData(View view){
         String name = textInputEditTextName.getText().toString();
