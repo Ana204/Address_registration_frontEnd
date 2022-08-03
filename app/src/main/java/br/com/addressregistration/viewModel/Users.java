@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import br.com.addressregistration.dominio.api.DomainUser;
 import br.com.addressregistration.model.Endereco_model;
 import br.com.addressregistration.model.Users_model;
@@ -29,34 +31,18 @@ public class Users {
     //chama endPoint post
     public void viewModel_users(String name, String email, String telephone, String cep,
                                 String logradouro, String numeroCasa, String complemento, String bairro, String localidade, String uf){
-        user = new DomainUser(this.context);
-
         try {
+            user = new DomainUser(this.context);
             usersModel = new Users_model(name, email, telephone, numeroCasa, cep);
             enderecoModel = new Endereco_model(logradouro, complemento, bairro, localidade, uf);
+
             user.PostUsers(usersModel, enderecoModel);
 
-
         }catch (IllegalArgumentException e){
 
             throw new IllegalArgumentException(e.getMessage());
 
         }
-
-
     }
 
-/*    public void viewModel_ViaCep(){
-        user = new DomainUser(this.context);
-
-        try {
-            //usersModel = new Users_model();
-            user.getViaCep();
-
-            Log.i("GET", "a view chamou a viewModel: ");
-        }catch (IllegalArgumentException e){
-
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }*/
 }

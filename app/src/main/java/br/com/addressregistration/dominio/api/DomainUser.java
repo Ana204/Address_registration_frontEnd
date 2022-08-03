@@ -10,6 +10,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +23,7 @@ import br.com.addressregistration.model.Users_model;
 
 public class DomainUser {
 
+    private static final String TAG = "DomainUser";
     RequestQueue queue;
     Context context;
 
@@ -64,30 +67,28 @@ public class DomainUser {
             object.put("Nome" , usersModel.getNome());
             object.put("Email", usersModel.getEmail());
             object.put("Telefone", usersModel.getTelefone());
-            object.put("CasaNumero", usersModel.getNumeroCasa());
             object.put("Cep", usersModel.getCep());
             object.put("Logradouro", enderecoModel.getLogradouro());
             object.put("Complemento", enderecoModel.getComplemento());
             object.put("Bairro", enderecoModel.getBairro());
             object.put("Cidade", enderecoModel.getLocalidade());
             object.put("Uf", enderecoModel.getUf());
-
+            object.put("CasaNumero", usersModel.getNumeroCasa());
 
         }catch (JSONException e){
-            Log.i("POST", "postData: " + e.getMessage());
+            Log.d(TAG, "Error PostUsers: " + e.getMessage());
         }
 
         JsonObjectRequest postRequestUsers = new JsonObjectRequest(Request.Method.POST, Utils.URL_POST, object,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        
-                        Log.i("POST", "onResponse: " + response);
+                        Log.i(TAG, "onResponse: " + response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("POST", "ERROR NO POST: " + error);
+                Log.d(TAG, "on Error Response: " + error);
             }
         });
 
@@ -99,6 +100,7 @@ public class DomainUser {
 
         queue.add(postRequestUsers);
     }
+
 
     public void getViaCep(String cep, APICallback apiCallback){
 
@@ -119,18 +121,18 @@ public class DomainUser {
                             );
 
                             apiCallback.onSuccess(enderecoModel);
-                            Log.i("RESPONSE", "onResponse: " + response);
+                            Log.i(TAG, "onResponse: " + response);
 
                         } catch (JSONException e) {
                             apiCallback.onError("ERROR" + e);
-                            Log.i("GET", "ERROR: " + e);
+                            Log.d(TAG, "Error onResponse: " + e.getMessage());
                         }
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("POST", "onErrorResponse: " + error);
+                Log.d(TAG, "onErrorResponse: " + error.getMessage());
             }
         });
 

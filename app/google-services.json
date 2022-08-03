@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "538526893739",
+    "project_id": "addressregistration",
+    "storage_bucket": "addressregistration.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538526893739:android:e2859c5c35c06649b459ee",
+        "android_client_info": {
+          "package_name": "br.com.addressregistration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538526893739-re64bjtdlshrbq3rirjl588hd1hfpioe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.addressregistration",
+            "certificate_hash": "cd387be7b6e079297d8c9aaaccf73b80c0220639"
+          }
+        },
+        {
+          "client_id": "538526893739-c403vhvbu50q88k2jri6mu8iv03lc2me.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd0rQmOJ8Vi3iCh3kHC0eLMLF5hJRWGeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538526893739-c403vhvbu50q88k2jri6mu8iv03lc2me.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

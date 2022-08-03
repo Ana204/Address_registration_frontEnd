@@ -1,38 +1,21 @@
 package br.com.addressregistration.view;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
-
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import br.com.addressregistration.R;
-import br.com.addressregistration.Utils.Utils;
 import br.com.addressregistration.dominio.api.DomainUser;
 import br.com.addressregistration.model.APICallback;
 import br.com.addressregistration.model.Endereco_model;
@@ -53,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
     private Users viewModelUsers;
     private DomainUser domainUser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +51,9 @@ public class MainActivity extends AppCompatActivity{
         //get request
         viewModelUsers = new Users(this);
        // viewModelUsers.RequestUsers();
-
         domainUser = new DomainUser(this);
+
+
 
     }
 

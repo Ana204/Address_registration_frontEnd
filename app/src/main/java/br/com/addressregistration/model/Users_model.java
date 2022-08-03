@@ -1,11 +1,14 @@
 package br.com.addressregistration.model;
 
+import android.util.Log;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Users_model {
 
+    private static final String TAG = "UsersModel";
     private Integer Id;
     private String Nome;
     private String Email;
@@ -78,29 +81,28 @@ public class Users_model {
     //validação
     public void validateData(String name, String email, String celular, String numeroCasa, String cep){
 
-            if (name.length() < 10)
-                throw new IllegalArgumentException("O campo nome deve conter no mínimo 10 caracteres");
+                if (name.length() < 10)
+                    throw new IllegalArgumentException("O campo nome deve conter no mínimo 10 caracteres");
 
-            if(!email.isEmpty())
-                isValidadeEmailAddress(email);
-            else
-                throw new IllegalArgumentException("Preencha o campo email");
+                if(!email.isEmpty())
+                    isValidadeEmailAddress(email);
+                else
+                    throw new IllegalArgumentException("Preencha o campo email");
 
-            if (!celular.isEmpty())
-                isValidadeTelefone(celular);
-            else
-                throw new IllegalArgumentException("Preencha o campo celular");
+                if (!celular.isEmpty())
+                    isValidadeTelefone(celular);
+                else
+                    throw new IllegalArgumentException("Preencha o campo celular");
 
-            if (numeroCasa.isEmpty())
-                throw new IllegalArgumentException("Preencha o campo com numero da casa");
+                if (numeroCasa.isEmpty())
+                    throw new IllegalArgumentException("Preencha o campo com numero da casa");
 
-            if (!cep.isEmpty())
-                isValidadeCep(cep);
-            else
-             throw new IllegalArgumentException("Preencha o campo cep");
+                if (!cep.isEmpty())
+                    isValidadeCep(cep);
+                else
+                    throw new IllegalArgumentException("Preencha o campo cep");
 
-
-            throw new IllegalArgumentException("Usuario cadastrado com sucesso");
+                throw new IllegalArgumentException("Usuario cadastrado com sucesso");
     }
 
     public void  isValidadeEmailAddress(String email){
